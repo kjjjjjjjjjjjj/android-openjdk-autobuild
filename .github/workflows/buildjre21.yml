@@ -78,7 +78,7 @@ jobs:
     - name: Repack JRE
       run: |
         cd android-openjdk-build
-        bash "repackjre.sh" $GITHUB_WORKSPACE/android-openjdk-build/pojav $GITHUB_WORKSPACE/android-openjdk-build/pojav/jre21-pojav
+        bash "android-openjdk-build/repackjre.sh" $GITHUB_WORKSPACE/android-openjdk-build/pojav $GITHUB_WORKSPACE/android-openjdk-build/pojav/jre21-pojav
     - name: Upload artifact
       uses: actions/upload-artifact@v4.3.1
       with:
