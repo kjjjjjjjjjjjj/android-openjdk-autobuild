@@ -37,18 +37,18 @@ jobs:
       uses: actions/upload-artifact@v4.3.1
       with:
         name: "jdk8-${{matrix.arch}}"
-        path: jdk8*.tar.xz
+        path: android-openjdk-build/jdk8*.tar.xz
 
     - name: Upload JRE build output
       uses: actions/upload-artifact@v4.3.1
       with:
         name: 'jre8-${{matrix.arch}}'
-        path: jre8*.tar.xz
+        path: android-openjdk-build/jre8*.tar.xz
     - name: Upload JRE debuginfo build output
       uses: actions/upload-artifact@v4.3.1
       with:
         name: "jre8-debuginfo-${{matrix.arch}}"
-        path: dizout
+        path: android-openjdk-build/dizout
 
   pojav:
     needs: build_android
@@ -60,26 +60,28 @@ jobs:
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre8-aarch32
-        path: pojav
+        path: android-openjdk-build/pojav
     - name: Get jre8-aarch64
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre8-aarch64
-        path: pojav
+        path: android-openjdk-build/pojav
     - name: Get jre8-x86
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre8-x86
-        path: pojav
+        path: android-openjdk-build/pojav
     - name: Get jre8-x86_64
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre8-x86_64
-        path: pojav
+        path: android-openjdk-build/pojav
     - name: Repack JRE
-      run: bash "repackjre.sh" $GITHUB_WORKSPACE/pojav $GITHUB_WORKSPACE/pojav/jre8-pojav
+      run: |
+        cd android-openjdk-build
+        bash "repackjre.sh" $GITHUB_WORKSPACE/android-openjdk-build/pojav $GITHUB_WORKSPACE/android-openjdk-build/pojav/jre8-pojav
     - name: Upload artifact
       uses: actions/upload-artifact@v4.3.1
       with:
           name: jre8-pojav
-          path: pojav/jre8-pojav/*
+          path: android-openjdk-build/pojav/jre8-pojav/*
