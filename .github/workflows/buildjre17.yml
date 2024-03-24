@@ -59,26 +59,28 @@ jobs:
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre17-aarch32
-        path: android-openjdk-build/pojav
+        path: pojav
     - name: Get jre17-aarch64
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre17-aarch64
-        path: android-openjdk-build/pojav
+        path: pojav
     - name: Get jre17-x86
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre17-x86
-        path: android-openjdk-build/pojav
+        path: pojav
     - name: Get jre17-x86_64
       uses: actions/download-artifact@v4.1.4
       with:
         name: jre17-x86_64
-        path: android-openjdk-build/pojav
+        path: pojav
     - name: Repack JRE
-      run: bash $GITHUB_WORKSPACE/android-openjdk-build/repackjre.sh $GITHUB_WORKSPACE/android-openjdk-build/pojav $GITHUB_WORKSPACE/android-openjdk-build/pojav/jre17-pojav
+      run: |
+        git clone --depth 1 --branch buildjre17 https://github.com/Vera-Firefly/android-openjdk-build
+        bash "android-openjdk-build/repackjre.sh" $GITHUB_WORKSPACE/pojav $GITHUB_WORKSPACE/pojav/jre17-pojav
     - name: Upload artifact
       uses: actions/upload-artifact@v4.3.1
       with:
           name: jre17-pojav
-          path: android-openjdk-build/pojav/jre17-pojav/*
+          path: pojav/jre17-pojav/*
