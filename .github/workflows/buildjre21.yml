@@ -53,7 +53,7 @@ jobs:
 
   pojav:
     needs: build_android
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.1.4
@@ -80,7 +80,7 @@ jobs:
     - name: Repack JRE
       run: |
         git clone --depth 1 --branch buildjre21 https://github.com/Vera-Firefly/android-openjdk-build
-        bash "android-openjdk-build/repackjre.sh" $GITHUB_WORKSPACE/pojav $GITHUB_WORKSPACE/pojav/jre17-pojav
+        bash "android-openjdk-build/repackjre.sh" $GITHUB_WORKSPACE/pojav $GITHUB_WORKSPACE/pojav/jre21-pojav
     - name: Upload artifact
       uses: actions/upload-artifact@v4.3.3
       with:
