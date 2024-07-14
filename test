@@ -1,0 +1,1 @@
+git submodule add <https://github.com/Vera-Firefly/android-openjdk-build> <test>
