@@ -1,0 +1,3 @@
+git add .github/workflows/ci-workflow.yml
+git commit -m "Add CI workflow for Maven build"
+git push origin main
