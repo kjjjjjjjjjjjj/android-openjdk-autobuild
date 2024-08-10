@@ -16,11 +16,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'          # Specify the Java version
-        distribution: 'adopt-openjdk'  # Specify the Java distribution
+    - name: Install OpenJDK 11
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-11-jdk
+
+    - name: Verify Java version
+      run: java -version
 
     - name: Build with Maven
       run: mvn install
