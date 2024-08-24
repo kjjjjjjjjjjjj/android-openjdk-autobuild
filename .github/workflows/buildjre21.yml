@@ -105,12 +105,6 @@ jobs:
         name: jre21-pojav
         path: JreOutPut
 
-    - name: Unzip
-      run: unzip android-openjdk-autobuild/JreOutPut/jre21-pojav.zip -d android-openjdk-autobuild/JreOutPut
-
-    - name: Delete
-      run: rm android-openjdk-autobuild/JreOutPut/jre21-pojav.zip
-
     - name: Push New Jre on this Repository
       run: |
         chmod +x push.sh
