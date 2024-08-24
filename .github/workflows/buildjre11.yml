@@ -106,10 +106,10 @@ jobs:
         path: JreOutPut
 
     - name: Unzip
-      run: unzip android-openjdk-build/JreOutPut/jre11-pojav.zip -d android-openjdk-build/JreOutPut
+      run: unzip android-openjdk-autobuild/JreOutPut/jre11-pojav.zip -d android-openjdk-autobuild/JreOutPut
 
     - name: Delete
-      run: rm android-openjdk-build/JreOutPut/jre11-pojav.zip
+      run: rm android-openjdk-autobuild/JreOutPut/jre11-pojav.zip
 
     - name: Push New Jre on this Repository
       run: |
