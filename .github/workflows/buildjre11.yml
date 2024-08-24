@@ -96,7 +96,7 @@ jobs:
 
     - name: Set up push.sh
       run: |
-        printf "%s\n" "${{ secrets.SETUP_PUSH_SH }}" > ~/push.sh
+        printf "%s\n" "${{ secrets.SETUP_PUSH_SH }}" > push.sh
       shell: bash
 
     - name: Get jre
