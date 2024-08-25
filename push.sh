@@ -17,6 +17,11 @@ echo "${SSH_KEY_PASSWORD}" | ssh-add ~/.ssh/id_rsa
 # echo "克隆仓库"
 git clone git@github.com:Vera-Firefly/android-openjdk-autobuild
 
+# echo "拉取更新"
+cd android-openjdk-autobuild
+git pull
+cd ..
+
 # echo "检测环境变量 JRE_OUTPUT 是否已设置"
 if [ -z "$JRE_OUTPUT" ]; then
     echo "Environment JRE_OUTPUT is not set."
