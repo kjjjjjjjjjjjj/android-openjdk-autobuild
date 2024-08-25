@@ -94,11 +94,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up push.sh
-      run: |
-        printf "%s\n" "${{ secrets.SETUP_PUSH_SH }}" > push.sh
-      shell: bash
-
     - name: Get jre
       uses: actions/download-artifact@v4.1.7
       with:
@@ -112,4 +107,6 @@ jobs:
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         SSH_KEY_PASSWORD: ${{ secrets.SSH_KEY_PASSWORD }}
+        USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        USER_NAME: ${{ secrets.USER_NAME }}
       shell: bash
