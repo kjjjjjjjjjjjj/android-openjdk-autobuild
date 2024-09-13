@@ -3,7 +3,7 @@ name: Build OpenJDK11 for Android
 on:
   workflow_dispatch:
   schedule:
-  - cron: "20 5 2,9,16,23 * *"
+  - cron: "10 5 2,9,16,23 * *"
 
 jobs:
   build_android:
@@ -21,7 +21,7 @@ jobs:
       uses: actions/setup-java@v4.1.0
       with:
         java-version: 11
-        distribution: dragonwell
+        distribution: zulu
     - name: Install build dependencies
       run: |
         sudo apt update
@@ -82,3 +82,32 @@ jobs:
       with:
           name: jre11-pojav
           path: pojav/jre11-pojav/*
+
+  push:
+    if: github.repository_owner == 'Vera-Firefly'
+    needs: pojav
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set IS_MAIN_BRANCH if on main branch
+      run: echo "JRE_OUTPUT=11" >> $GITHUB_ENV
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get jre
+      uses: actions/download-artifact@v4.1.7
+      with:
+        name: jre11-pojav
+        path: JreOutPut
+
+    - name: Push New Jre on this Repository
+      run: |
+        chmod +x push.sh
+        sh push.sh
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_KEY_PASSWORD: ${{ secrets.SSH_KEY_PASSWORD }}
+        USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        USER_NAME: ${{ secrets.USER_NAME }}
+      shell: bash
+
